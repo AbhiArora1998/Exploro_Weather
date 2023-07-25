@@ -19,7 +19,17 @@
                     <h3>{{ourValues.current.wind_kph +' Kph'}} <img src="../../assets/Images/wind.png" width="50px" alt=""> </h3>
                     <p class="card-text" style="position: relative; bottom: -10px;">{{ourValues.location.localtime}}</p>
                 </div>
-                
+                <div *ngIf="moreInfoOpen == true && foreCastData" >
+                   <div    style="display: flex; justify-content: space-evenly; padding-top: 50px;" *ngFor="let item of foreCastData.forecast.forecastday[0].hour">
+                        <h4>
+                              {{item.time}}
+                        </h4>
+                        
+                        <div style="display: flex; ">
+                          <h3>{{ item.temp_c+" " }}&deg;</h3> <img [src]="item.condition.icon" height="50px" alt="">
+                        </div>
+                   </div>  
+                </div>
               </div>
             </div>
           </div>
