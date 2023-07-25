@@ -1,0 +1,25 @@
+/* You can add global styles to this file, and also import other style files */
+* { padding: 0; margin: 0; }
+:root{
+    --morningBackgroundColor :#ffffff;
+    --nightBackgroundColor:#000000;
+    --eveningBackgroundColor:#f98a6c;
+    --mainHeadingColor:#0f2d6b;
+}
+
+
+body{
+    width: 100%;
+    height: 100%;
+    background-color: var(--morningBackgroundColor);
+}
+
+.welcomeHeading{
+    color: white;
+    position: absolute;
+    z-index: 2;
+    left: 37%;
+    font-family: 'Exo 2', sans-serif;
+    font-size: 4em;
+    opacity: 0.7;
+}

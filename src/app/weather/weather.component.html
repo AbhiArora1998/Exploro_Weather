@@ -1,0 +1,28 @@
+<div class="weatherPictures">
+    <h1 class="welcomeHeading">Welcome to Exploro</h1>
+    <img class="floatingSurface cloud1" src="../../assets/Images/Cloud.png" alt="">
+    <img class="floatingSurface cloud2" src="../../assets/Images/Cloud.png" alt="">
+    <img class="floatingSurface " src="../../assets/Images/Cloud.png" alt="">
+
+
+    <img class="imageSize" src="../../assets/Images/BlueSKYWITHSUN.jpg" alt="">
+    <div  class="column">
+        
+        <div *ngIf="ourValues" class="col-sm-4" style="margin-left: 33%; position: absolute; z-index: 3; top: 15%; ">
+            <div [@openClose]="moreInfoOpen ? 'open' : 'closed'" class="card">
+              <div class="card-body" style="text-align: center;">
+                  <h1 > {{ourValues.location.name}} <img [src]="ourValues.current.condition.icon" alt=""></h1>
+                <h1  class="card-title degreesBar">{{ourValues.current.temp_c}}&deg;</h1>
+                <h4>{{ourValues.current.condition.text}}</h4>
+                <div style="display: flex; justify-content: space-between;" >
+                    <a  class="btn  btn-outline-light" (click)="expandTransition()">{{infoString}} </a>
+                    <h3>{{ourValues.current.wind_kph +' Kph'}} <img src="../../assets/Images/wind.png" width="50px" alt=""> </h3>
+                    <p class="card-text" style="position: relative; bottom: -10px;">{{ourValues.location.localtime}}</p>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+    </div>
+
+</div>
