@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { BehaviorSubject } from "rxjs";
 import { environment } from "src/Environment/environment.dev";
 
 @Injectable({
@@ -7,7 +8,8 @@ import { environment } from "src/Environment/environment.dev";
 })
 export class WeatherService{
     
-    weatherUrl ="https://weatherapi-com.p.rapidapi.com/"
+    weatherUrl = "https://weatherapi-com.p.rapidapi.com/"
+    placeNameWithCode = new BehaviorSubject<any>({name:"Toronto",code:"CA"})
     constructor(private http:HttpClient) {
         
     }
@@ -30,5 +32,9 @@ export class WeatherService{
             },
             params:{q: location}
         })
+    }
+
+    setCountryNameAndCode(value:any) {
+        this.placeNameWithCode.next(value)
     }
 }

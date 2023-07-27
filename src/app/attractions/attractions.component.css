@@ -1,0 +1,18 @@
+.cardsContainer{
+  position: relative;
+    display: flex;margin-left: 10%;  width: 80vw; top: -10vh;
+    overflow-x: scroll;
+    
+    
+}
+
+
+
+.card::-webkit-scrollbar {
+    display: none;
+  }
+
+  .card {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }

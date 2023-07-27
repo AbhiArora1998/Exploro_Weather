@@ -22,7 +22,18 @@ import {trigger, state, style, animate, transition} from '@angular/animations'
      'opacity': '.5',
      
    })),transition('closed <=> open',[animate('0.2s')])
-  ])]
+  ]),
+  trigger('openClosePage', [
+    state('open', style({
+      'height': '120vh',
+      
+      
+   })), state('closed', style({
+    
+     
+   })),transition('closed <=> open',[animate('0.3s')])
+  ])
+  ]
 })
 export class WeatherComponent implements OnInit{
   ourValues: any
@@ -37,7 +48,11 @@ export class WeatherComponent implements OnInit{
   
   ngOnInit() {
 
-    this.myWeatherData("Paris")
+    
+    this.weatherService.placeNameWithCode.subscribe(Response => {
+      this.myWeatherData(Response.name)
+      console.log("we got called ",Response)
+    })
     
   }
   

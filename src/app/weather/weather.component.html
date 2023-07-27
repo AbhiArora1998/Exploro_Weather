@@ -1,11 +1,11 @@
-<div class="weatherPictures">
+<div [@openClosePage]="moreInfoOpen ? 'open' : 'closed'" class="weatherPictures">
     <h1 class="welcomeHeading">Welcome to Exploro</h1>
     <img class="floatingSurface cloud1" src="../../assets/Images/Cloud.png" alt="">
     <img class="floatingSurface cloud2" src="../../assets/Images/Cloud.png" alt="">
     <img class="floatingSurface " src="../../assets/Images/Cloud.png" alt="">
 
 
-    <img class="imageSize" src="../../assets/Images/BlueSKYWITHSUN.jpg" alt="">
+    <img class="imageSize" src="../../assets/Images/EveningSKY.jpg" alt="">
     <div  class="column">
         
         <div *ngIf="ourValues" class="col-sm-4" style="margin-left: 33%; position: absolute; z-index: 3; top: 15%; ">
@@ -19,8 +19,9 @@
                     <h3>{{ourValues.current.wind_kph +' Kph'}} <img src="../../assets/Images/wind.png" width="50px" alt=""> </h3>
                     <p class="card-text" style="position: relative; bottom: -10px;">{{ourValues.location.localtime}}</p>
                 </div>
-                <div *ngIf="moreInfoOpen == true && foreCastData" >
-                   <div    style="display: flex; justify-content: space-evenly; padding-top: 50px;" *ngFor="let item of foreCastData.forecast.forecastday[0].hour">
+                <div *ngIf="moreInfoOpen == true" >
+                  <app-spinner *ngIf="!foreCastData" class="lds-ring"><div></div><div></div><div></div><div></div></app-spinner>
+                   <div  data-toggle="tooltip" data-placement="top" [title]="item.condition.text"  style="display: flex; justify-content: space-evenly; padding-top: 50px; cursor: pointer;" *ngFor="let item of foreCastData.forecast.forecastday[0].hour">
                         <h4>
                               {{item.time}}
                         </h4>
@@ -28,7 +29,7 @@
                         <div style="display: flex; ">
                           <h3>{{ item.temp_c+" " }}&deg;</h3> <img [src]="item.condition.icon" height="50px" alt="">
                         </div>
-                   </div>  
+                      </div>  
                 </div>
               </div>
             </div>
