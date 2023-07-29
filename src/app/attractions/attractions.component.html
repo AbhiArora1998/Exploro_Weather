@@ -1,30 +1,33 @@
-<div *ngIf="moreInfobox && moreInfoData" style="position: relative; padding-left: 20%; padding-right: 20%; display: flex; color: white;">
-    <img [src]="moreInfoData.image" alt="No Image Available" width="300px" height="300px" style="border-radius: 25px;">
-    <div style="padding-left: 5%;">
-        <h1>{{moreInfoData.place}}</h1>
+<div class="moreInfoContainer" *ngIf="moreInfobox && moreInfoData" [ngStyle]="{color:fontColor}" >
+    <img class="moreInfoImage" [src]="moreInfoData.image" alt="No Image Available"  >
+    <div [ngStyle]="{'padding-left': '5%',color:fontColor}">
+        <div class="moreInfoData">
+            <h1>{{moreInfoData.place}}</h1>
+            <button type="button" class="btn btn-dark btn-lg" (click)="moreInfobox=false">return</button>
+        </div>
         <h4>{{moreInfoData.info}}</h4>
         <h5>#{{moreInfoData.kinds}}</h5>
-        <button type="button" class="btn btn-outline-light btn-lg" (click)="moreInfobox=false">return</button>
+        
     </div>
 </div>
 <div *ngIf="!moreInfobox">
     
     <!-- search input -->
-    <form #attractionInputForm="ngForm" class="input-group input-group-sm mb-3" style="width: 40%;  margin-left: 30%; bottom: 100px;">
+    <form #attractionInputForm="ngForm" class="input-group input-group-sm mb-3" >
         <div class="input-group-prepend" >
             <span  class="btn btn-secondary btn-lg active">City</span>
         </div>
-        <input required  placeholder="City &#40;Ex:- Vancouver&#41;" style="margin-right: 20px; border-style: solid; border-color: black;" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" ngModel name="countryName">
+        <input required  placeholder="City &#40;Ex:- Vancouver&#41;"  type="text" class="form-control firstInput" aria-label="Small" aria-describedby="inputGroup-sizing-sm" ngModel name="countryName">
         <div class="input-group-prepend">
             <span  class="btn btn-secondary btn-lg active ">Country's Abbreviation</span>
           </div>
-          <input required  placeholder="Country Code &#40;Ex:- CA&#41;" style=" border-style: solid; border-color: black;" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" ngModel name="countryCode">
+          <input required  placeholder="Country Code &#40;Ex:- CA&#41;"  type="text" class="form-control secondInput" aria-label="Small" aria-describedby="inputGroup-sizing-sm" ngModel name="countryCode">
           <button style="margin-left: 1%;" [disabled]="!attractionInputForm.valid" type="button" class="btn btn-primary" (click)="submitData(attractionInputForm)">Search</button>
     </form>
-    <div *ngIf="attractionsFound.length<1" style="margin-left:50% ;">
+    <div *ngIf="attractionsFound.length<1" class="spinner">
         <app-spinner ></app-spinner>
     </div>
-    <h1 style=" position: relative; top: -10vh; margin-left: 45%; opacity: 0.7;color: var(--mainHeadingColor); font-weight: 600;"> <u>Attractions</u> </h1>
+    <h1 class="attractionHeading"> <u>Attractions</u> </h1>
     <div class="cardsContainer" *ngIf="attractionsFound.length>0" >
         
         <div   *ngFor="let attractions of attractionsFound" style="margin-right: 2%;">
@@ -33,11 +36,11 @@
                 <img class="card-img-top" style="opacity: 1;" [src]="attractions.image" alt="No Image Found" width="100px" height="100px">
                 <div class="card-body">
                 <h5 class="card-title">{{attractions.place}}</h5>
-                <p>{{attractions.address}}</p>
+                <p>#{{attractions.address}}</p>
                 <!-- <p class="card-text">{{attractions.info}}</p> -->
                 <!-- <p >{{attractions.kinds}}</p> -->
                 </div>
-                <button style="width: 50%; margin: 1%;" (click)="moreInfo(attractions)" type="button" class="btn btn-outline-light">More info</button>
+                <button (click)="moreInfo(attractions)" type="button" class="btn btn-outline-light cardMoreInfo">More info</button>
 
             </div>
 

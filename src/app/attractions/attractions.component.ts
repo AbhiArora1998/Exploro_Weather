@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PlacesService } from '../Services/Places.service';
 import { PlaceInterface } from "../models/PlaceInterface"
-import { Form, NgForm } from '@angular/forms';
+import {  NgForm } from '@angular/forms';
 import { WeatherService } from '../Services/weather.service';
 import { AttractionsContent } from '../models/Attractions';
 import { trigger, state, style, transition, animate } from '@angular/animations';
@@ -17,18 +17,23 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
      'color':'#fff',
      'opacity':'0',
       'height': '30vh',
-      'overflow-y': 'scroll'
+      'overflow-y': 'scroll',
+      'margin-bottom': '10px',
+     'border':'solid white',
+     'margin-left':'10px'
 
    })), state('down', style({
-    'box-shadow': '-7px 6px 5px 0px black',
+    'box-shadow': '-3px 6px 5px 0px white',
     'background-color': '#000',
     'color':'#fff',
     'opacity':'.6',
      'height': '30vh',
-     'overflow-y': 'scroll'
-   
+     'overflow-y': 'scroll',
+     'margin-bottom': '10px',
+     'margin-left':'10px',
+     'border':'solid white',
      
-   })),transition('* <=> down',[animate('2s')])
+   })),transition('* <=> down',[animate('1s')])
   ])
   ]
 })
@@ -39,6 +44,7 @@ export class AttractionsComponent implements OnInit{
   moreInfobox: boolean = false
   moreInfoData:any
   i = 0
+  fontColor ="#000000"
   constructor(private placeService: PlacesService,private weatherService:WeatherService) {
    
   }
@@ -50,6 +56,9 @@ export class AttractionsComponent implements OnInit{
       this.weatherService.setCountryNameAndCode(Response)
       this.placeService.setAttractionValue(Response)
       this.getAttractions()
+    })
+    this.weatherService.backGroundConfigure.subscribe(Response => {
+      this.fontColor = Response.fontColor
     })
   }
 

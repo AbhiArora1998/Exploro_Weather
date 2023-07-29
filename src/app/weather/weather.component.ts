@@ -1,14 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { WeatherService } from '../Services/weather.service';
-import {trigger, state, style, animate, transition} from '@angular/animations'
+import {trigger, state, style, animate, transition, query} from '@angular/animations'
 @Component({
   selector: 'app-weather',
   templateUrl: './weather.component.html',
   styleUrls: ['./weather.component.css'],
   animations: [trigger('openClose', [
+    
     state('open', style({
       'box-shadow': '-3px 6px 5px 0px rgba(176,164,176,1)',
-     
+      'border':'solid white',
      'background-color': '#000',
      'color': '#fff',
      'opacity': '.5',
@@ -16,32 +17,25 @@ import {trigger, state, style, animate, transition} from '@angular/animations'
       'overflow-y': 'scroll'
    })), state('closed', style({
      'box-shadow': '-3px 6px 5px 0px rgba(176,164,176,1)',
-     
+     'border':'solid white',
      'background-color': '#000',
      'color': '#fff',
      'opacity': '.5',
      
-   })),transition('closed <=> open',[animate('0.2s')])
-  ]),
-  trigger('openClosePage', [
-    state('open', style({
-      'height': '120vh',
-      
-      
-   })), state('closed', style({
-    
-     
-   })),transition('closed <=> open',[animate('0.3s')])
+   })
+   ), transition('closed <=> open', [animate('0.2s')])
   ])
+ 
   ]
 })
 export class WeatherComponent implements OnInit{
-  ourValues: any
+  weatherData: any
   moreInfoOpen: boolean = false
   infoString: string = "More Info"
   foreCastData:any
-
-
+  backGroundColor = ""
+  backGroundImage = ""
+  @Output() isCardExpanded = new EventEmitter()
   constructor(private weatherService: WeatherService) {
     
   }
@@ -49,34 +43,49 @@ export class WeatherComponent implements OnInit{
   ngOnInit() {
 
     
+    this.getCurrentTime()
+
     this.weatherService.placeNameWithCode.subscribe(Response => {
       this.myWeatherData(Response.name)
-      console.log("we got called ",Response)
     })
     
+  }
+
+  getCurrentTime() {
+    const currentTime = new Date()
+    if ((currentTime.getHours()>=0 && currentTime.getHours()<7) || (currentTime.getHours()>21 && currentTime.getHours()<24) ) {
+      this.weatherService.backGroundConfigure.next({Image:"NightSKY.jpg",Color:"#000000",fontColor:"#ffffff"})
+      this.backGroundImage = "NightSKY.jpg"
+      this.backGroundColor="#000000"
+    } else if (currentTime.getHours()>6 && currentTime.getHours()<17) {
+      this.weatherService.backGroundConfigure.next({Image:"BlueSKYWITHSUN.jpg",Color:"#ffffff",fontColor:"#000000"})
+      this.backGroundImage = "BlueSKYWITHSUN.jpg"
+      this.backGroundColor="#ffffff"
+    } else {
+      this.weatherService.backGroundConfigure.next({Image:"EveningSKY.jpg",Color:"#f98a6c",fontColor:"#ffffff"})
+      this.backGroundImage = "EveningSKY.jpg"
+      this.backGroundColor="#f98a6c"
+    }
   }
   
 
   myWeatherData(value:string) {
     this.weatherService.getRealtimeWeaterData(value).subscribe((Response) => {
-      this.ourValues = Response
+      this.weatherData = Response
       
     });
   }
 
   myWeatherForecast(location:string) {
     this.weatherService.getWeatherForeCast(location).subscribe(Response => {
-      console.log(Response)
-      
       this.foreCastData = Response
-      console.log(this.foreCastData.forecast.forecastday[0].hour)
     })
   }
 
 
 
   expandTransition() {
-    
+    this.isCardExpanded.emit(this.moreInfoOpen)
     this.infoString = this.moreInfoOpen == true ? "More Info" : "Less Info"
     if (this.moreInfoOpen == false) {
       setTimeout(() => {
@@ -84,7 +93,8 @@ export class WeatherComponent implements OnInit{
       },100)
     }
     
+    this.foreCastData = this.moreInfoOpen == false ? this.foreCastData = null : this.foreCastData = this.foreCastData
     this.moreInfoOpen = !this.moreInfoOpen
-    this.foreCastData = this.moreInfoOpen == true ? this.foreCastData = null: this.foreCastData = this.foreCastData
+    
   }
 }

@@ -1,8 +1,4 @@
-.weatherPictures{
-    
-    background-color: var(--eveningBackgroundColor);
-    
-}
+
 
 .imageSize{
     width:100% ;
@@ -23,16 +19,40 @@
     height: 20vh;
     left: 20;
 }
+.cardContainer{
+    margin-left: 33%; 
+    position: absolute; 
+    z-index: 3; 
+    top: 15%;
+}
+.card-body{
+    text-align: center;
+}
 
+.card_body_container{
+    display: flex; justify-content: space-between;
+}
+.card-text{
+    position: relative; bottom: -10px;
+}
+.HourlyInfo{
+    display: flex; justify-content: space-evenly; padding-top: 50px; cursor: pointer;
+}
 .card{
-    box-shadow: -3px 6px 5px 0px rgba(176,164,176,1);
-    transition: all .5s ease-in-out;
+  
     background-color: #000;
     color: #fff;
     opacity: .5;
     
   }
-  
+  .card::-webkit-scrollbar {
+    display: none;
+  }
+
+  .card {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
 
   .degreesBar{
       text-align: center;
@@ -40,4 +60,4 @@
       font-weight: 600;
   }
 
- 
+  

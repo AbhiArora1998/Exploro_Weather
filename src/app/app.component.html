@@ -1,14 +1,16 @@
-<div class="mainBody">
+<div >
 
-
-    <app-weather>
+  <div >
+    <app-weather (isCardExpanded)="boolReceived($event)">
 
     </app-weather>
   
+  </div>
+    
 
   
 
-  <div class="attractions">
+  <div *ngIf="isOpen" >
     <app-attractions>
 
     </app-attractions>

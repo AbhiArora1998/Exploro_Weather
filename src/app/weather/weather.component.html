@@ -1,33 +1,34 @@
-<div [@openClosePage]="moreInfoOpen ? 'open' : 'closed'" class="weatherPictures">
+<div  [ngStyle]="{background: backGroundColor}">
     <h1 class="welcomeHeading">Welcome to Exploro</h1>
     <img class="floatingSurface cloud1" src="../../assets/Images/Cloud.png" alt="">
     <img class="floatingSurface cloud2" src="../../assets/Images/Cloud.png" alt="">
-    <img class="floatingSurface " src="../../assets/Images/Cloud.png" alt="">
+    <img class="floatingSurface" src="../../assets/Images/Cloud.png" alt="">
 
 
-    <img class="imageSize" src="../../assets/Images/EveningSKY.jpg" alt="">
+    <img class="imageSize" src="../../assets/Images/{{backGroundImage}}" alt="">
     <div  class="column">
         
-        <div *ngIf="ourValues" class="col-sm-4" style="margin-left: 33%; position: absolute; z-index: 3; top: 15%; ">
+        <div *ngIf="weatherData" class="col-sm-4 cardContainer" >
             <div [@openClose]="moreInfoOpen ? 'open' : 'closed'" class="card">
-              <div class="card-body" style="text-align: center;">
-                  <h1 > {{ourValues.location.name}} <img [src]="ourValues.current.condition.icon" alt=""></h1>
-                <h1  class="card-title degreesBar">{{ourValues.current.temp_c}}&deg;</h1>
-                <h4>{{ourValues.current.condition.text}}</h4>
-                <div style="display: flex; justify-content: space-between;" >
+              <div class="card-body">
+                  <h1 > {{weatherData.location.name}} <img [src]="weatherData.current.condition.icon" alt=""></h1>
+                <h1  class="card-title degreesBar">{{weatherData.current.temp_c}}&deg;</h1>
+                <h4>{{weatherData.current.condition.text}}</h4>
+                <div class="card_body_container"  >
                     <a  class="btn  btn-outline-light" (click)="expandTransition()">{{infoString}} </a>
-                    <h3>{{ourValues.current.wind_kph +' Kph'}} <img src="../../assets/Images/wind.png" width="50px" alt=""> </h3>
-                    <p class="card-text" style="position: relative; bottom: -10px;">{{ourValues.location.localtime}}</p>
+                    <h3>{{weatherData.current.wind_kph +' Kph'}} <img src="../../assets/Images/wind.png" width="50px" alt=""> </h3>
+                    <p class="card-text" >{{weatherData.location.localtime}}</p>
                 </div>
                 <div *ngIf="moreInfoOpen == true" >
-                  <app-spinner *ngIf="!foreCastData" class="lds-ring"><div></div><div></div><div></div><div></div></app-spinner>
-                   <div  data-toggle="tooltip" data-placement="top" [title]="item.condition.text"  style="display: flex; justify-content: space-evenly; padding-top: 50px; cursor: pointer;" *ngFor="let item of foreCastData.forecast.forecastday[0].hour">
+                  <app-spinner *ngIf="!foreCastData" ></app-spinner>
+                   <div class="HourlyInfo" data-toggle="tooltip" data-placement="top" [title]="item.condition.text"   *ngFor="let item of foreCastData.forecast.forecastday[0].hour">
                         <h4>
                               {{item.time}}
                         </h4>
                         
-                        <div style="display: flex; ">
-                          <h3>{{ item.temp_c+" " }}&deg;</h3> <img [src]="item.condition.icon" height="50px" alt="">
+                        <div class="d-flex flex-row">
+                          <h3>{{ item.temp_c+" " }}&deg;</h3> 
+                          <img [src]="item.condition.icon" height="50px" alt="">
                         </div>
                       </div>  
                 </div>

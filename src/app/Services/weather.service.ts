@@ -10,7 +10,8 @@ export class WeatherService{
     
     weatherUrl = "https://weatherapi-com.p.rapidapi.com/"
     placeNameWithCode = new BehaviorSubject<any>({name:"Toronto",code:"CA"})
-    constructor(private http:HttpClient) {
+    backGroundConfigure = new BehaviorSubject<any>({Image:"BlueSKYWITHSUN.jpg",Color:"#ffffff",fontColor:"#000000"}) 
+    constructor(private http: HttpClient) {
         
     }
 
