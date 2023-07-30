@@ -25,9 +25,9 @@
           <button style="margin-left: 1%;" [disabled]="!attractionInputForm.valid" type="button" class="btn btn-primary" (click)="submitData(attractionInputForm)">Search</button>
     </form>
     <div *ngIf="attractionsFound.length<1" class="spinner">
-        <app-spinner ></app-spinner>
+        <h2>No Data Available</h2>
     </div>
-    <h1 class="attractionHeading"> <u>Attractions</u> </h1>
+    <h1 class="attractionHeading" [ngStyle]="{color: fontColor}"> <u>Attractions</u> </h1>
     <div class="cardsContainer" *ngIf="attractionsFound.length>0" >
         
         <div   *ngFor="let attractions of attractionsFound" style="margin-right: 2%;">

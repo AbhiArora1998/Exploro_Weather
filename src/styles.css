@@ -1,5 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 * { padding: 0; margin: 0; }
+
+
+
 :root{
     --morningBackgroundColor :#ffffff;
     --nightBackgroundColor:#000000;
@@ -13,6 +16,8 @@ body{
     height: 100%;
     /* background-color: var(--eveningBackgroundColor); */
     overflow: hidden;
+    font-family: 'Exo 2', sans-serif;
+
 }
 
 
@@ -22,8 +27,8 @@ body{
     color: white;
     position: absolute;
     z-index: 2;
-    left: 37%;
+    left: 34%;
     font-family: 'Exo 2', sans-serif;
     font-size: 4em;
-    opacity: 0.7;
+    
 }

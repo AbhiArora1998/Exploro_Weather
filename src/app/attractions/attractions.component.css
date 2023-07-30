@@ -1,6 +1,6 @@
 .cardsContainer{
   position: relative;
-    display: flex;margin-left: 10%;  width: 80vw; top: vh;
+    display: flex;margin-left: 10%;  width: 80vw; bottom: 7vh;
     overflow-x: scroll;
     
     
@@ -32,10 +32,11 @@
 }
 
 .spinner{
-  margin-left:50% ;
+  margin-left:45% ;
+  color: white;
 }
 .attractionHeading{
-  position: absolute; bottom: 350px; margin-left: 45%; opacity: 0.7;color: rgb(144, 144, 248); font-weight: 600;
+  position: absolute; bottom: 380px; margin-left: 45%;font-weight: 600;
 }
 
 .cardMoreInfo{

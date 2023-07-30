@@ -1,0 +1,26 @@
+.imageSize{
+    width:100% ;
+    height: 60vh;
+}
+.floatingSurface{
+    position: absolute;
+    z-index: 1;
+}
+
+.cardContainer{
+    position: absolute; 
+    z-index: 3; 
+    top: 1%;
+    width: 80%
+}
+
+.card{
+  
+    background-color: #000;
+    color: #fff;
+    opacity: .5;
+    
+  }
+  .pargraph{
+    padding: 2% 5% 0 1%; text-align: justify;
+  }

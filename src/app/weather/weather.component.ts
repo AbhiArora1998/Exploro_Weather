@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { WeatherService } from '../Services/weather.service';
 import {trigger, state, style, animate, transition, query} from '@angular/animations'
+
 @Component({
   selector: 'app-weather',
   templateUrl: './weather.component.html',
@@ -35,6 +36,8 @@ export class WeatherComponent implements OnInit{
   foreCastData:any
   backGroundColor = ""
   backGroundImage = ""
+  cityName =""
+  @Output() onABoutPage = new EventEmitter()
   @Output() isCardExpanded = new EventEmitter()
   constructor(private weatherService: WeatherService) {
     
@@ -46,18 +49,21 @@ export class WeatherComponent implements OnInit{
     this.getCurrentTime()
 
     this.weatherService.placeNameWithCode.subscribe(Response => {
+      this.cityName = Response.name
       this.myWeatherData(Response.name)
     })
     
   }
-
+  naviate() {
+    this.onABoutPage.emit(true) 
+  }
   getCurrentTime() {
     const currentTime = new Date()
-    if ((currentTime.getHours()>=0 && currentTime.getHours()<7) || (currentTime.getHours()>21 && currentTime.getHours()<24) ) {
+    if ((currentTime.getHours()>=0 && currentTime.getHours()<7) || (currentTime.getHours()>20 && currentTime.getHours()<24) ) {
       this.weatherService.backGroundConfigure.next({Image:"NightSKY.jpg",Color:"#000000",fontColor:"#ffffff"})
       this.backGroundImage = "NightSKY.jpg"
       this.backGroundColor="#000000"
-    } else if (currentTime.getHours()>6 && currentTime.getHours()<17) {
+    } else if (currentTime.getHours()>6 && currentTime.getHours()<16) {
       this.weatherService.backGroundConfigure.next({Image:"BlueSKYWITHSUN.jpg",Color:"#ffffff",fontColor:"#000000"})
       this.backGroundImage = "BlueSKYWITHSUN.jpg"
       this.backGroundColor="#ffffff"
@@ -65,6 +71,22 @@ export class WeatherComponent implements OnInit{
       this.weatherService.backGroundConfigure.next({Image:"EveningSKY.jpg",Color:"#f98a6c",fontColor:"#ffffff"})
       this.backGroundImage = "EveningSKY.jpg"
       this.backGroundColor="#f98a6c"
+    }
+  }
+
+  getTheme(value: string) {
+    if (value == "Morning") {
+      this.weatherService.backGroundConfigure.next({Image:"BlueSKYWITHSUN.jpg",Color:"#ffffff",fontColor:"#000000"})
+      this.backGroundImage = "BlueSKYWITHSUN.jpg"
+      this.backGroundColor="#ffffff"
+    } else if (value == "Evening") {
+      this.weatherService.backGroundConfigure.next({Image:"EveningSKY.jpg",Color:"#f98a6c",fontColor:"#ffffff"})
+      this.backGroundImage = "EveningSKY.jpg"
+      this.backGroundColor="#f98a6c"
+    } else if (value == 'Night') {
+      this.weatherService.backGroundConfigure.next({Image:"NightSKY.jpg",Color:"#000000",fontColor:"#ffffff"})
+      this.backGroundImage = "NightSKY.jpg"
+      this.backGroundColor="#000000"
     }
   }
   
@@ -79,6 +101,7 @@ export class WeatherComponent implements OnInit{
   myWeatherForecast(location:string) {
     this.weatherService.getWeatherForeCast(location).subscribe(Response => {
       this.foreCastData = Response
+      console.log(this.foreCastData,"where")
     })
   }
 
@@ -89,7 +112,7 @@ export class WeatherComponent implements OnInit{
     this.infoString = this.moreInfoOpen == true ? "More Info" : "Less Info"
     if (this.moreInfoOpen == false) {
       setTimeout(() => {
-        this.myWeatherForecast("Paris")
+        this.myWeatherForecast(this.cityName)
       },100)
     }
     

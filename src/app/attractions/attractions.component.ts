@@ -38,7 +38,8 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
   ]
 })
 export class AttractionsComponent implements OnInit{
-  placeData: PlaceInterface | undefined
+  placeData: any
+  initialvalue=""
   featuresFound: any = []
   attractionsFound: AttractionsContent[] = []
   moreInfobox: boolean = false
@@ -50,16 +51,18 @@ export class AttractionsComponent implements OnInit{
   }
 
   ngOnInit() {
-    this.placeService.getPlaceData('Toronto', 'CA').subscribe(Response => {
-      this.i=0
-      this.placeData = Response
-      this.weatherService.setCountryNameAndCode(Response)
-      this.placeService.setAttractionValue(Response)
-      this.getAttractions()
-    })
+      this.placeService.getPlaceData(this.weatherService.placeNameWithCode.value.name, this.weatherService.placeNameWithCode.value.code).subscribe(Response => {
+        this.i = 0
+        this.placeData = Response
+        this.weatherService.setCountryNameAndCode(Response)
+        this.placeService.setAttractionValue(Response)
+        this.getAttractions()
+      })
+    
     this.weatherService.backGroundConfigure.subscribe(Response => {
       this.fontColor = Response.fontColor
     })
+    
   }
 
   submitData(value:NgForm) {
@@ -67,7 +70,8 @@ export class AttractionsComponent implements OnInit{
 
 
     this.placeService.getPlaceData(value.value.countryName, value.value.countryCode).subscribe(Response => {
-      this.i=0
+      this.i = 0
+      this.weatherService.placeNameWithCode.next({name:value.value.countryName,code:value.value.countryCode})
       this.placeData = Response
       this.weatherService.setCountryNameAndCode(Response)
       this.placeService.setAttractionValue(Response)
@@ -97,7 +101,7 @@ export class AttractionsComponent implements OnInit{
       setTimeout(() => {
         this.placeService.getAttractionsImages(value[this.i].properties.xid).subscribe(Response => {
           var data: any = Response
-          console.log(data)
+          console.log(data,"with")
               
           this.attractionsFound.push({
             place: data.name,

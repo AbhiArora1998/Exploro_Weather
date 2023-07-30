@@ -1,5 +1,14 @@
 <div  [ngStyle]="{background: backGroundColor}">
     <h1 class="welcomeHeading">Welcome to Exploro</h1>
+    <div style="display: flex; position:absolute; right: 2px; z-index: 3;">
+      <button type="button" class="btn btn-outline-light" (click)="getCurrentTime()" >Auto</button>
+      <button type="button" class="btn btn-outline-light" (click)="getTheme('Morning')" >Morning</button>
+      <button type="button" class="btn btn-outline-light" (click)="getTheme('Evening')">Evening</button>
+      <button type="button" class="btn btn-outline-light" (click)="getTheme('Night')">Night</button>
+      <button type="button" class="btn btn-outline-light" (click)="naviate()">About</button>
+    </div>
+    
+
     <img class="floatingSurface cloud1" src="../../assets/Images/Cloud.png" alt="">
     <img class="floatingSurface cloud2" src="../../assets/Images/Cloud.png" alt="">
     <img class="floatingSurface" src="../../assets/Images/Cloud.png" alt="">
@@ -19,9 +28,10 @@
                     <h3>{{weatherData.current.wind_kph +' Kph'}} <img src="../../assets/Images/wind.png" width="50px" alt=""> </h3>
                     <p class="card-text" >{{weatherData.location.localtime}}</p>
                 </div>
-                <div *ngIf="moreInfoOpen == true" >
-                  <app-spinner *ngIf="!foreCastData" ></app-spinner>
-                   <div class="HourlyInfo" data-toggle="tooltip" data-placement="top" [title]="item.condition.text"   *ngFor="let item of foreCastData.forecast.forecastday[0].hour">
+                <app-spinner *ngIf="moreInfoOpen == true && foreCastData ==null"></app-spinner>
+                <div *ngIf="moreInfoOpen == true && foreCastData !=null" >
+                 
+                   <div  class="HourlyInfo" data-toggle="tooltip" data-placement="top" [title]="item.condition.text"   *ngFor="let item of foreCastData.forecast.forecastday[0].hour">
                         <h4>
                               {{item.time}}
                         </h4>

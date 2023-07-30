@@ -35,7 +35,8 @@ export class WeatherService{
         })
     }
 
-    setCountryNameAndCode(value:any) {
-        this.placeNameWithCode.next(value)
+    setCountryNameAndCode(value: any) {
+       
+        this.placeNameWithCode.next({name:value.name,code:value.country})
     }
 }

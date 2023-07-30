@@ -9,10 +9,11 @@
     z-index: 1;
 }
 
+
 .cloud1{
     width: 15%;
     height: 20vh;
-    right: 0;
+    right: 100px;
 }
 .cloud2{
     width: 15%;

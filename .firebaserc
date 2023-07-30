@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "explorowebsite": {
+      "hosting": {
+        "WeatherProject": [
+          "explorowebsite"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "explorowebsite"
+  }
+}

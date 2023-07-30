@@ -1,0 +1,49 @@
+<div  [ngStyle]="{color: fontColor}">
+    <button type="button" class="btn btn-outline-light" style="position:absolute; right: 2px; font-size: large;" (click)="navigate()"  >Back</button>
+    <img class="imageSize" src="../../assets/Images/{{backGroundImage}}" alt="">
+
+    <div class="floatingSurface" style="display: flex; top: 5%;">
+        <div style="width: 40%;">
+                <img style="margin-top: 2%; border: solid white;" width="500px" height="250px" src="../../assets/Images/NightShot.jpg" alt="">
+                <img style="margin-top: 2%; border: solid white;" width="500px" height="250px" src="../../assets/Images/mornigshot.jpg" alt="">
+                <img style="margin-top: 2%; border: solid white;" width="500px" height="250px" src="../../assets/Images/EveningShot.jpg" alt="">
+        </div>
+          
+        <div>
+
+            <div  class="col-sm-4 cardContainer" >
+                <div class="card">
+                        <h1 style="text-align: center;" >About</h1>
+                    <div class="card-body">
+                        <h3 class="pargraph"  >
+                            My goal is to help people explore attractions in the city they are looking forward to visit.
+                            However, weather can ruins the trip if one is not aware of it. This Website allows the user to view the climate conditions
+                            and the attractions of that city. Furthermore, helps them smartly plan the day ahead without getting is ruined by Climate Conditions 
+                        </h3>
+                        <h1 style="text-align: center;"  class="card-title">Working</h1>
+                        
+                        <div class="card_body_container"  >
+                            
+                            <h3 class="pargraph">
+                                <ul>
+                                    <li> Click on More info on weather card to see the hourly update of the day </li>
+                                    <li> Click on Less info on weather card to hide the info </li>
+                                    <li> City input box => Type the name of the city such as Vancouver, New York, Agra and so on </li>
+                                    <li> On Country Abbrevation input box => Type Country's Abbreviation such as CA, US, IN and so on </li>
+                                    <li> The search button will stay disabled until both the input has been filled </li>
+                                    <li> If the input has wrong city or abbreviation, there will be no Attraction cards displayed at the bottom </li>
+                                    <li> On Attractions panel scroll left or right to see more attractions</li>
+                                    <li> Click on more info on the attraction cards to see detailed information about them</li>
+                                </ul>
+                             </h3>
+                        </div> 
+                    </div> 
+                </div>
+            </div>
+
+
+
+
+        </div>  
+    </div>
+</div>

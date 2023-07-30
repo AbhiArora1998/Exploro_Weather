@@ -1,19 +1,6 @@
 <div >
-
-  <div >
-    <app-weather (isCardExpanded)="boolReceived($event)">
-
-    </app-weather>
-  
-  </div>
-    
-
-  
-
-  <div *ngIf="isOpen" >
-    <app-attractions>
-
-    </app-attractions>
-  </div>
-
+    <app-weather  *ngIf="!onAboutPage" (isCardExpanded)="boolReceived($event)" (onABoutPage)="aboutPage($event)"></app-weather>
+    <app-attractions *ngIf="isOpen && !onAboutPage"></app-attractions>
+    <app-about *ngIf="onAboutPage" (isABoutOpen)="aboutPage($event)"></app-about>
+    <h5 [ngStyle]="{color: color}" style="position: absolute; bottom: 1%; margin-left: 5px;"> Developed By: <br> Abhishek Arora &nbsp; <a target="_blank" href="https://www.linkedin.com/in/abhishek-arora-5b9b47191/"><i style="font-size: 2rem" class="pi pi-linkedin"></i></a> &nbsp;  <a target="_newtab" href="mailto:arora.abhishek705@gmail.com"><i  style="font-size: 2rem" class="pi pi-envelope"></i></a></h5>
 </div>
