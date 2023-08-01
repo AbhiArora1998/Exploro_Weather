@@ -1,5 +1,5 @@
 
-import { AfterViewInit, Component, ElementRef, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef } from '@angular/core';
 import { WeatherService } from './Services/weather.service';
 import { PrimeNGConfig } from 'primeng/api';
 @Component({
